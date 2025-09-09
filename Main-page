@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .header {
+            background-color: #009FE3;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        .features {
+            display: flex;
+            gap: 20px;
+            padding: 40px;
+            background: #f5f5f5;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .feature {
+            max-width: 250px;
+            text-align: center;
+        }
+        .about {
+            display: flex;
+            gap: 30px;
+            padding: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .about-text {
+            flex: 1;
+            min-width: 250px;
+        }
+        .about-image {
+            flex: 1;
+            min-width: 250px;
+        }
+        .footer {
+            background-color: #4B0082;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            .features, .about {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Cyber Security</h1>
+        <p>Protecting Your Digital Life</p>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <img src="https://via.placeholder.com/100" alt="Feature 1">
+            <h3>Real-time Monitoring</h3>
+            <p>Stay secure with our continuous real-time threat monitoring.</p>
+        </div>
+        <div class="feature">
+            <img src="https://via.placeholder.com/100" alt="Feature 2">
+            <h3>Advanced Encryption</h3>
+            <p>Protect your sensitive data with industry-leading encryption.</p>
+        </div>
+        <div class="feature">
+            <img src="https://via.placeholder.com/100" alt="Feature 3">
+            <h3>Expert Support</h3>
+            <p>Get 24/7 cybersecurity support from our trusted team.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-text">
+            <h2>About Cyber Security</h2>
+            <p>We provide state-of-the-art security solutions to protect your business from cyber threats.</p>
+            <button>Read More</button>
+        </div>
+        <div class="about-image">
+            <img src="https://via.placeholder.com/400x250" alt="Cyber" style="max-width:100%;">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>⚡ The highest level of security! ⚡</p>
+    </footer>
+</body>
+</html>  

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Japan Trip Plan - Osaka Kyoto Takayama Shirakawa-go</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #34495e;
+      --accent-color: #3498db;
+      --success-color: #1abc9c;
+      --warning-color: #f39c12;
+      --danger-color: #e74c3c;
+      --light-gray: #ecf0f1;
+      --white: #ffffff;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* Accessibility improvements */
+    *:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+
+    /* Skip link for screen readers */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--primary-color);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 1000;
+      border-radius: 4px;
+    }
+
+    .skip-link:focus {
+      top: 6px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      text-align: center;
+      padding: clamp(20px, 5vw, 40px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      font-weight: 300;
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    .trip-info {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, #2c3e50 100%);
+      color: white;
+      text-align: center;
+      padding: clamp(15px, 3vw, 25px);
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .trip-info p {
+      margin: 8px 0;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    .trip-info strong {
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .day {
+      background: var(--white);
+      margin: clamp(20px, 4vw, 30px) auto;
+      padding: clamp(20px, 4vw, 30px);
+      border-radius: var(--border-radius);
+      max-width: 900px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .day::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color) 0%, var(--success-color) 100%);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      border-left: 4px solid var(--accent-color);
+      padding-left: 15px;
+      margin-bottom: 20px;
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .special-event h2 {
+      border-left-color: var(--danger-color);
+      color: var(--danger-color);
+    }
+
+    .special-event::before {
+      background: linear-gradient(90deg, var(--danger-color) 0%, #fd79a8 100%);
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 12px 0;
+      padding: 15px;
+      background: var(--light-gray);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-color);
+      transition: var(--transition);
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    li:hover {
+      background: #dde4e6;
+      transform: translateX(4px);
+    }
+
+    .transport-info {
+      background: linear-gradient(135deg, #e8f6f3 0%, #d1f2eb 100%);
+      border: 2px solid var(--success-color);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .transport-info::before {
+      content: '🚆';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      background: var(--success-color);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .transport-info h4 {
+      color: #16a085;
+      margin: 0 0 10px 0;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .transport-info p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 50%);
+      border-left-color: var(--warning-color);
+      font-weight: 500;
+    }
+
+    .special-event {
+      background: linear-gradient(135deg, #ff7675 0%, #fd79a8 100%);
+      color: white;
+      position: relative;
+    }
+
+    .special-event::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="40">🎊</text></svg>') repeat;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    .special-event li {
+      background: rgba(255, 255, 255, 0.2);
+      border-left-color: white;
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+
+    .special-event li:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .special-event .transport-info {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--primary-color);
+    }
+
+    iframe {
+      width: 100%;
+      height: clamp(250px, 50vw, 350px);
+      border: none;
+      border-radius: var(--border-radius);
+      margin-top: 15px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    iframe:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .time-badge {
+      background: linear-gradient(135deg, var(--accent-color) 0%, #74b9ff 100%);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 500;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+      flex-shrink: 0;
+    }
+
+    .special-event .time-badge {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+      color: var(--primary-color);
+    }
+
+    footer {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      text-align: center;
+      padding: clamp(30px, 5vw, 50px);
+      margin-top: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    footer h3 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      .day {
+        margin: 15px;
+        padding: 20px;
+      }
+
+      li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .time-badge {
+        margin-bottom: 5px;
+      }
+
+      .transport-info {
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .transport-info::before {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+        top: -8px;
+        left: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .day {
+        margin: 10px;
+        padding: 15px;
+      }
+
+      iframe {
+        height: 200px;
+      }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .day {
+        border: 2px solid var(--primary-color);
+      }
+
+      .time-badge {
+        border: 1px solid rgba(0,0,0,0.3);
+      }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #ecf0f1;
+      }
+
+      .day {
+        background: #34495e;
+        color: #ecf0f1;
+      }
+
+      li {
+        background: #2c3e50;
+        color: #ecf0f1;
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #f39c12 0%, #e67e22 50%);
+        color: white;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      .day {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+      }
+
+      iframe {
+        display: none;
+      }
+
+      .time-badge {
+        background: #333 !important;
+        color: white !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก</a>
+  
+  <header role="banner">
+    <h1>🇯🇵 Japan Trip Plan</h1>
+    <p>โอซาก้า - เกียวโต - ทาคายามะ - ชิราคาวาโกะ</p>
+  </header>
+
+  <div class="trip-info" role="complementary" aria-label="ข้อมูลการเดินทาง">
+    <p><strong>📅 ระยะเวลา:</strong> 26 ธันวาคม 2568 - 2 มกราคม 2569 (8 วัน 7 คืน)</p>
+    <p><strong>✈️ เที่ยวบิน:</strong> เชียงใหม่ (CNX) → โอซาก้า (KIX) | <strong>🎫 บัตรเดินทาง:</strong> Takayama-Hokuriku Area Tourist Pass + ICOCA Card</p>
+    <p><strong>🎉 ไฮไลท์:</strong> ฉลองปีใหม่ที่ Universal Studios Japan NO LIMIT! Countdown</p>
+  </div>
+
+  <main id="main-content" class="container">
+    <section class="day" aria-labelledby="day1-heading">
+      <h2 id="day1-heading">Day 1: 26 ธันวาคม 2568 - โอซาก้าต้อนรับการมาเยือน 🛬</h2>
+      <div class="transport-info" role="complementary" aria-label="ข้อมูลการเดินทาง">
+        <h4>🚆 การเดินทาง</h4>
+        <p>00:40 น. ออกเดินทางจากเชียงใหม่ → 07:30 น. ถึงโอซาก้า KIX<br>
+        แลก/ซื้อ Takayama-Hokuriku Pass และ ICOCA Card ที่สนามบิน</p>
+      </div>
+      <ul role="list">
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">13:00-14:00</span>เช็คอินที่พัก ย่าน Namba หรือ Umeda</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">14:00-18:00</span>พักผ่อน เดินเล่นย่านใกล้ที่พัก</li>
+        <li role="listitem" class="highlight"><span class="time-badge" aria-label="เวลา">18:00-20:00</span>เดินเล่น Dotonbori & Shinsaibashi - ชมป้ายไฟกูลิโกะ กินทาโกะยากิ โอโคโนมิยากิ</li>
+      </ul>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.258249054764!2d135.5008913152312!3d34.67341398044149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e7143525389f%3A0x3da0095e548a3717!2sDotonbori%2C%20Chuo%20Ward%2C%20Osaka%2C%20542-0071%2C%20Japan!5e0!3m2!1sen!2sth!4v1663588636453!5m2!1sen!2sth" allowfullscreen="" loading="lazy" title="แผนที่ Dotonbori"></iframe>
+    </section>
+
+    <section class="day" aria-labelledby="day2-heading">
+      <h2 id="day2-heading">Day 2: 27 ธันวาคม 2568 - เสน่ห์แห่งเกียวโต ⛩️</h2>
+      <div class="transport-info" role="complementary" aria-label="ข้อมูลการเดินทาง">
+        <h4>🎫 เปิดใช้งาน Takayama-Hokuriku Area Tourist Pass (วันแรก)</h4>
+        <p>08:00 น. โอซาก้า → เกียวโต (รถไฟ JR ใช้พาส)</p>
+      </div>
+      <ul role="list">
+        <li role="listitem" class="highlight"><span class="time-badge" aria-label="เวลา">09:00-12:00</span>Fushimi Inari Shrine - เสาโทริอิสีแดงนับพันต้น เดินขึ้นเขาอินาริ</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">12:00-13:00</span>รับประทานอาหารกลางวัน</li>
+        <li role="listitem" class="highlight"><span class="time-badge" aria-label="เวลา">13:00-17:00</span>Kiyomizu-dera Temple + Sannenzaka & Ninenzaka - วัดน้ำใส ถนนโบราณ</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">17:00-19:00</span>เดินทางกลับโอซาก้า</li>
+      </ul>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.918915438183!2d135.7824556152399!3d34.98418928036328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600108d147321e9f%3A0x83e4e938953119e1!2sKiyomizu-dera%20Temple!5e0!3m2!1sen!2sth!4v1663588726588!5m2!1sen!2sth" allowfullscreen="" loading="lazy" title="แผนที่ Kiyomizu-dera Temple"></iframe>
+    </section>
+
+    <section class="day" aria-labelledby="day3-heading">
+      <h2 id="day3-heading">Day 3: 28 ธันวาคม 2568 - มุ่งหน้าสู่ทาคายามะ 🏔️</h2>
+      <div class="transport-info" role="complementary" aria-label="ข้อมูลการเดินทาง">
+        <h4>🚄 การเดินทางไกล (ใช้ Pass วันที่ 2)</h4>
+        <p>Shin-Osaka → Nagoya (Shinkansen) → Takayama (Limited Express Hida) รวมประมาณ 4 ชั่วโมง</p>
+      </div>
+      <ul role="list">
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">08:00-09:00</span>เดินทางจากที่พักไป Shin-Osaka Station</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">09:00-14:00</span>การเดินทางสู่ทาคายามะ - ชมทิวทัศน์ภูเขาแอลป์ญี่ปุ่น</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">14:00-15:00</span>เช็คอินที่พักในทาคายามะ</li>
+        <li role="listitem" class="highlight"><span class="time-badge" aria-label="เวลา">15:00-18:00</span>Sanmachi Suji - ย่านเมืองเก่า บ้านเรือนโบราณสไตล์เอโดะ โรงกลั่นสาเก</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">18:00-</span>ลองเนื้อฮิดะ (Hida Beef) และพักผ่อน</li>
+      </ul>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.51739806495!2d137.2520868152778!3d36.14571998003328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600294dd58058459%3A0x5f9a6552554d80a!2sSanmachi%20Suji!5e0!3m2!1sen!2sth!4v1663588806254!5m2!1sen!2sth" allowfullscreen="" loading="lazy" title="แผนที่ Sanmachi Suji"></iframe>
+    </section>
+
+    <section class="day" aria-labelledby="day4-heading">
+      <h2 id="day4-heading">Day 4: 29 ธันวาคม 2568 - มรดกโลกชิราคาวาโกะ 🏠</h2>
+      <div class="transport-info" role="complementary" aria-label="ข้อมูลการเดินทาง">
+        <h4>🚌 รถบัส Nohi (ใช้ Pass วันที่ 3) (ต้องจองที่นั่งล่วงหน้า)</h4>
+        <p>09:00 น. ทาคายามะ → 10:00 น. ชิราคาวาโกะ</p>
+      </div>
+      <ul role="list">
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">08:30</span>เดินทางไปสถานี Takayama Nohi Bus Center</li>
+        <li role="listitem" class="highlight"><span class="time-badge" aria-label="เวลา">10:00-16:00</span>Shirakawa-go (หมู่บ้านโอกิมาจิ) - ชมบ้านกัสโชซูคุริ มรดกโลก เดินขึ้นจุดชมวิว Shiroyama Viewpoint และหาร้านอาหารอร่อยๆ</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">16:00-17:00</span>เดินทางกลับทาคายามะด้วยรถบัส</li>
+      </ul>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25529.17934444087!2d136.89901416977536!3d36.26033720000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6002c0b6b0a7c473%3A0xdd97a73d32890533!2sShirakawa-go!5e0!3m2!1sen!2sth!4v1663588901859!5m2!1sen!2sth" allowfullscreen="" loading="lazy" title="แผนที่ Shirakawa-go"></iframe>
+    </section>
+
+    <section class="day" aria-labelledby="day5-heading">
+      <h2 id="day5-heading">Day 5: 30 ธันวาคม 2568 - เดินทางกลับโอซาก้า 🚄</h2>
+      <div class="transport-info" role="complementary" aria-label="ข้อมูลการเดินทาง">
+        <h4>🚆 เส้นทางกลับ (ใช้ Pass วันที่ 4)</h4>
+        <p>ทาคายามะ → นาโกย่า → โอซาก้า</p>
+      </div>
+      <ul role="list">
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">09:00-14:00</span>การเดินทางกลับ - ลาทาคายามะ ชมวิวครั้งสุดท้าย</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">14:00-15:00</span>กลับถึงที่พักในโอซาก้า</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">15:00-18:00</span>Osaka Castle - ปราสาทโอซาก้า พิพิธภัณฑ์ สวนปราสาท</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">18:00-</span>อาหารค่ำ ช้อปปิ้ง เตรียมตัวสำหรับวันพิเศษ</li>
+      </ul>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.825745140656!2d135.5242780152315!3d34.68434828043869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e0cd24821a7d%3A0xcb3231c5520556f8!2sOsaka%20Castle!5e0!3m2!1sen!2sth!4v1663588965853!5m2!1sen!2sth" allowfullscreen="" loading="lazy" title="แผนที่ Osaka Castle"></iframe>
+    </section>
+
+    <section class="day special-event" aria-labelledby="day6-heading">
+      <h2 id="day6-heading">Day 6: 31 ธันวาคม 2568 - ฉลองปีใหม่ที่ USJ! 🎊</h2>
+      <div class="transport-info" role="complementary" aria-label="ข้อมูลการเดินทาง">
+        <h4>✅ ใช้ Takayama-Hokuriku Pass (วันสุดท้าย) เพื่อเดินทางไป USJ ได้!</h4>
+        <p>ใช้บัตร ICOCA สำหรับค่าใช้จ่ายอื่นๆ / พิจารณาย้ายไปพักใกล้สนามบินในวันถัดไป</p>
+      </div>
+      <ul role="list">
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">เช้า-บ่าย</span>พักผ่อน ซื้อของฝาก เตรียมตัวสำหรับงานเคาท์ดาวน์</li>
+        <li role="listitem" class="highlight"><span class="time-badge" aria-label="เวลา">17:00-ดึก</span>Universal Studios Japan NO LIMIT! Countdown 2025 🎆</li>
+        <li role="listitem">เครื่องเล่นสุดมันส์ + การแสดงพิเศษ + เคาท์ดาวน์ปีใหม่ + ดอกไม้ไฟ</li>
+      </ul>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.864757570494!2d135.43233851523078!3d34.65825228044535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e0d5a71a396d%3A0x83359239c36c4b0!2sUniversal%20Studios%20Japan!5e0!3m2!1sen!2sth!4v1663589028751!5m2!1sen!2sth" allowfullscreen="" loading="lazy" title="แผนที่ Universal Studios Japan"></iframe>
+    </section>
+
+    <section class="day" aria-labelledby="day7-heading">
+      <h2 id="day7-heading">Day 7: 1 มกราคม 2569 - สนุกต่อเนื่องและเตรียมตัวกลับ 🎮</h2>
+      <ul role="list">
+        <li role="listitem" class="highlight"><span class="time-badge" aria-label="เวลา">เช้า-เย็น</span>USJ วันที่ 2 - บัตรเคาท์ดาวน์ใช้ได้ถึง 21:00 น.</li>
+        <li role="listitem">เล่นเครื่องเล่นที่พลาดไป + ช้อปปิ้งของที่ระลึก</li>
+        <li role="listitem"><span class="time-badge" aria-label="เวลา">ช่วงเย็น</span>เดินทางย้ายไปพักใกล้สนามบิน KIX เตรียมพร้อมเดินทางกลับ</li>
+      </ul>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.864757570494!2d135.43233851523078!3d34.65825228044535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e0d5a71a396d%3A0x83359239c36c4b0!2sUniversal%20Studios%20Japan!5e0!3m2!1sen!2sth!4v1663589028751!5m2!1sen!2sth" allowfullscreen="" loading="lazy" title="แผนที่ Universal Studios Japan"></iframe>
+    </section>
+
+    <section class="day" aria-labelledby="day8-heading">
+      <h2 id="day8-heading">Day 8: 2 มกราคม 2569 - เดินทางกลับบ้าน 🏠</h2>
+      <div class="transport-info" role="complementary" aria-label="ข้อมูลการเดินทาง">
+        <h4>✈️ เที่ยวบินกลับ</h4>
+        <p>06:30-08:00 น. เดินทางไปสนามบิน KIX | 09:00 น. ออกเดินทางกลับเชียงใหม่</p>
+      </div>
+      <ul role="list">
+        <li role="listitem" class="highlight"><span class="time-badge" aria-label="เวลา">09:00</span>เดินทางสู่เมืองไทย 🛫</li>
+        <li role="listitem">เดินทางกลับพร้อมความทรงจำดีๆ และของฝากมากมาย 🎁</li>
+      </ul>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.685419401764!2d135.2445831152238!3d34.40933758051052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000b91509930065%3A0x88f5a676a6b10099!2sKansai%20International%20Airport%20(KIX)!5e0!3m2!1sen!2sth!4v1663589146313!5m2!1sen!2sth" allowfullscreen="" loading="lazy" title="แผนที่ Kansai International Airport"></iframe>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <h3>🌟 สนุกให้สุดใจกับการเดินทางครั้งนี้! 🌟</h3>
+    <p>ขอให้มีความสุขและปลอดภัยตลอดการเดินทาง</p>
+  </footer>
+</body>
+</html>
